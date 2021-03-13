@@ -8,24 +8,39 @@ const dbDebug = require('debug')('app:db');
 const dbErrors = debug('db:errors')
 const error = debug('error')
 const bodyParser = require('body-parser')
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express')
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: "MediPlan API",
+            description: "MediPlan Backend API",
+            servers: ["http://localhost:5000"]
+        }
+    },
+    apis: ['./routes/*.js']
+}
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 //calling the routes
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(require('./routes/patientRegistrationRoute'))
 
-//checking if the Database string environment variable is set
-if (!config.get("DatabaseString")) {
-    error("FATAL ERROR:Database Connection is not defined");
-    process.exit(-1)
-}
-//checking if the port environment variable is sett
+// //checking if the Database string environment variable is set
+// if (!config.get("DatabaseString")) {
+//     error("FATAL ERROR:Database Connection is not defined");
+//     process.exit(-1)
+// }
+// //checking if the port environment variable is sett
 if (!config.get("PORT")) {
     error("FATAL ERROR:Port connection is not defined");
     process.exit(-1)
 }
 
 //connect to mongo database
-mongoose.connect(config.get("DatabaseString"), { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect("mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongodb.net/mediplan-backend?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
     .then(() => {
         dbDebug("Connected Successfully...")
     })
@@ -34,7 +49,7 @@ mongoose.connect(config.get("DatabaseString"), { useUnifiedTopology: true, useNe
     })
 
 //connecting to application port
-const port = process.env.PORT || config.get("PORT")
+const port = process.env.PORT || 5000
 app.listen(port, () => {
     startupdebug(`Listening on port ${port}`)
 })
