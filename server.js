@@ -7,9 +7,10 @@ const startupdebug = require("debug")("app:startup")
 const dbDebug = require('debug')('app:db');
 const dbErrors = debug('db:errors')
 const error = debug('error')
+const bodyParser = require('body-parser')
 
 //calling the routes
-app.use(express.json())
+app.use(bodyParser.urlencoded({extended:true}))
 app.use(require('./routes/patientRegistrationRoute'))
 
 //checking if the Database string environment variable is set

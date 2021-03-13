@@ -6,9 +6,10 @@ function validatePatientRegistration(patient) {
         firstname: Joi.string().min(3).max(50).required(),
         lastname: Joi.string().min(3).max(50).required(),
         Username: Joi.string().min(4).max(50).required(),
+        Email:Joi.string().min(5).max(200).required(),
         Password: Joi.string().min(5).max(200).required(),
-        Gender: Joi.string().min(5).max(200).required(),
-        ContactNumber: Joi.number().min(10).max(13).required()
+        Gender: Joi.string().required(),
+        ContactNumber: Joi.number().required()
     }
     return Joi.validate(patient, schema)
 }
@@ -52,7 +53,7 @@ const patientRegistrationSchema = new mongoose.Schema({
         enum: ['male', 'female']
     },
     ContactNumber: {
-        type: String,
+        type: Number,
         minLength: 10,
         maxLength: 13,
         required: true
