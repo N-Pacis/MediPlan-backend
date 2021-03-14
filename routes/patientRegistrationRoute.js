@@ -7,51 +7,49 @@ const _ = require('lodash')
 /**
  * @swagger
  * /register:
- *  post:
- *     description:Register A Patient
+ *   post:
+ *     description: Register a new patient
  *     parameters:
- *       -name:firstname
- *            description: First Name of the patient
- *            in:formData
- *            required:true
- *            type:string
- *       -name:lastname:
- *             description: Last Name of the patient
- *             in:formData
- *             required:true
- *             type:string
- *       -name:Username:
- *             description: User of the patient
- *             in:formData
- *             required:true
- *             type:string
- *       -name:Email:
- *             description: Email of the patient
- *             in:formData
- *             required:true
- *             type:string
- *       -name:Password:
- *             description: Password of the patient
- *             in:formData
- *             required:true
- *             type:string
- *       -name:Gender:
- *             description: Gender of the patient
- *             in:formData
- *             required:true
- *             type:string
- *       -name:ContactNumber:
- *             description: Contact Number of the patient
- *             in:formData
- *             required:true
- *             type:number
- *       responses:
- *          200:
- *            description:Success
- *          400:
- *            description:Bad Request
- *          500:
- *            description:Internal Server Error
+ *       - name: firstname
+ *         description: First Name of the patient
+ *         in: formData
+ *         type: string
+ *         required: true
+ *       - name: lastname
+ *         description: Last Name of the patient
+ *         type: string
+ *         in: formData
+ *         required: true
+ *       - name: Username
+ *         description: User Name of the patient
+ *         type: string
+ *         in: formData
+ *         required: true
+ *       - name: Email
+ *         description: Email of the patient
+ *         type: string
+ *         in: formData
+ *         required: true
+ *       - name: Password
+ *         description: Password of the patient
+ *         type: string
+ *         in: formData
+ *         required: true
+ *       - name: Gender
+ *         description: Gender of the patient
+ *         type: string
+ *         in: formData
+ *         required: true
+ *       - name: ContactNumber
+ *         description: Contact Number of the patient
+ *         in: formData
+ *         type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *       500:
+ *         description: Internal Server Error
  */
 router.post('/register', async(req, res) => {
     try {
