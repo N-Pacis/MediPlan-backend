@@ -1,4 +1,4 @@
 {
-    "DatabaseString": "app_database",
+    "Database": "app_database",
     "PORT": "app_port"
 }

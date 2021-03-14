@@ -29,10 +29,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(require('./routes/patientRegistrationRoute'))
 
 // //checking if the Database string environment variable is set
-// if (!config.get("DatabaseString")) {
-//     error("FATAL ERROR:Database Connection is not defined");
-//     process.exit(-1)
-// }
+if (!config.get("Database")) {
+    error("FATAL ERROR:Database Connection is not defined");
+    process.exit(-1)
+}
 // //checking if the port environment variable is sett
 if (!config.get("PORT")) {
     error("FATAL ERROR:Port connection is not defined");
@@ -49,7 +49,7 @@ mongoose.connect("mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongo
     })
 
 //connecting to application port
-const port = process.env.PORT || 5000
+const port = process.env.PORT || config.get("PORT")
 app.listen(port, () => {
     startupdebug(`Listening on port ${port}`)
 })
