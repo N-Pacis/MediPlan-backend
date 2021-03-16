@@ -1,4 +1,7 @@
 {
     "Database": "app_database",
-    "PORT": "app_port"
+    "PORT": "app_port",
+    "jwtPrivateKey": "app_jwt",
+    "email_user": "app_email_user",
+    "email_password": "app_email_password"
 }

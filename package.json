@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "set app_port=5000 & set app_database=mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongodb.net/mediplan-backend?retryWrites=true & set DEBUG=app:*,db:*,error & nodemon server.js"
+        "start": "set app_port=5000 & set app_database=mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongodb.net/mediplan-backend?retryWrites=true & set app_jwt=mediplanJwtKey & set app_email_user=pacisnkubito@gmail.com &set app_email_password=stephencurry &set DEBUG=app:*,db:*,error & nodemon server.js"
     },
     "repository": {
         "type": "git",
@@ -24,7 +24,9 @@
         "config": "^3.3.6",
         "debug": "^4.3.1",
         "express": "^4.17.1",
-        "mongoose": "^5.12.0"
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.12.0",
+        "nodemailer": "^6.5.0"
     },
     "devDependencies": {
         "joi": "^13.1.0",

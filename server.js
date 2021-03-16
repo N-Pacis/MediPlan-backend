@@ -40,7 +40,7 @@ if (!config.get("PORT")) {
 }
 
 //connect to mongo database
-mongoose.connect("mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongodb.net/mediplan-backend?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect("mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongodb.net/mediplan-backend?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => {
         dbDebug("Connected Successfully...")
     })

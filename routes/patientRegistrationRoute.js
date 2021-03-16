@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { registerPatient } = require('../controllers/patientRegistrationController')
+const { registerPatient, validatePatientByEmail } = require('../controllers/patientRegistrationController')
 
 /**
  * @swagger
@@ -28,6 +28,11 @@ const { registerPatient } = require('../controllers/patientRegistrationControlle
  *         type: string
  *         in: formData
  *         required: true
+ *       - name: DateOfBirth
+ *         description: Date Of Birth of the patient
+ *         type: string
+ *         in: formData
+ *         required: true
  *       - name: Password
  *         description: Password of the patient
  *         type: string
@@ -48,9 +53,13 @@ const { registerPatient } = require('../controllers/patientRegistrationControlle
  *         description: Success
  *       400:
  *         description:Bad Request
+ *       404:
+ *         description:Not Found
  *       500:
  *         description: Internal Server Error
  */
 router.post('/register', registerPatient)
+
+router.get("/verification/:token", validatePatientByEmail)
 
 module.exports = router

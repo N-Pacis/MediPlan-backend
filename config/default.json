@@ -1,4 +1,7 @@
 {
     "Database": "",
-    "PORT": ""
+    "PORT": "",
+    "jwtPrivateKey": "",
+    "email_user": "",
+    "email_password": ""
 }
