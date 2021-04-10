@@ -16,7 +16,8 @@ const swaggerOptions = {
         info: {
             title: "MediPlan API",
             description: "MediPlan Backend API",
-            servers: ["http://localhost:5000"]
+            servers: ["http://localhost:5000"],
+            version: "V1.2.3"
         }
     },
     apis: ['./routes/*.js']
@@ -28,26 +29,21 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(require('./routes/patientRegistrationRoute'))
 
-// //checking if the Database string environment variable is set
-if (!config.get("Database")) {
-    error("FATAL ERROR:Database Connection is not defined");
-    process.exit(-1)
-}
 // //checking if the port environment variable is sett
 if (!config.get("PORT")) {
     error("FATAL ERROR:Port connection is not defined");
+    console.log("FATAL ERROR:Port connection is not defined")
     process.exit(-1)
 }
 
 //connect to mongo database
-mongoose.connect("mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongodb.net/mediplan-backend?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
+mongoose.connect("mongodb+srv://appo-backend:appo12345@appo.pvehh.mongodb.net/appo-backend?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
     .then(() => {
         dbDebug("Connected Successfully...")
     })
     .catch(err => {
         dbErrors("Failed to connect due to ", err)
     })
-
 //connecting to application port
 const port = process.env.PORT || config.get("PORT")
 app.listen(port, () => {

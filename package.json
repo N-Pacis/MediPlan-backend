@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "set app_port=5000 & set app_database=mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongodb.net/mediplan-backend?retryWrites=true & set app_jwt=mediplanJwtKey & set app_email_user=pacisnkubito@gmail.com &set app_email_password=stephencurry &set DEBUG=app:*,db:*,error & nodemon server.js"
+        "start": "set app_port=5000 & set app_jwt=mediplanJwtKey & set app_email_user=pacisnkubito@gmail.com &set app_email_password=stephencurry &set DEBUG=app:*,db:*,error & nodemon server.js"
     },
     "repository": {
         "type": "git",
