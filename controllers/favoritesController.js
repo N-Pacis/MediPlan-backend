@@ -1,7 +1,33 @@
 const {Favorite,validate} = require("../models/favoritesModel")
 
-//function to add a new favorite. We will get a url that is like this  "/favorites/favoriteCategory:favoriteCategoryId then we split it
+//function to get all favorites
+exports.getFavorites = async(req,res)=>{
+    try{
+        //we get the user from the authentiction middleware
+        const userId = req.user._id
+        //we get the list of favorites
+        const favorites = await Favorite.find({user:userId})
+        if(!favorites) return res.status(400).send("You have no favorites yet!")
+        res.send(favorites);
+    }
+    catch(ex){
+        res.status(500).send(ex.message)
+    }
+}
 
+//function to get one favorite by passing the favorite id in the params
+exports.getOneFavorite = async(req,res)=>{
+    try{
+        const userId = req.user._id
+        const favorite = await Favorite.find({_id:req.params.id,user:userId})
+        if(!favorite) return res.status(404).send("The requested favorite was not found")
+    }
+    catch(ex){
+        res.status(500).send(ex.message)
+    }
+}
+
+//function to add a new favorite. We will get a url that is like this  "/favorites/new/favoriteCategory:favoriteCategoryId then we split it
 exports.addNewFavorite = async (req, res) => {
     try {
         //we get the user id from the authentication middleware
