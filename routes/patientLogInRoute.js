@@ -10,12 +10,12 @@ const {logInPatient} = require('../controllers/patientLogInController');
  *     description: LogIn a patient
  *     parameters:
  *       - name: Email
- *         description: First Name of the patient
+ *         description: Email of the patient
  *         in: formData
  *         type: string
  *         required: true
  *       - name: Password
- *         description: Last Name of the patient
+ *         description: Password of the patient
  *         type: string
  *         in: formData
  *         required: true
