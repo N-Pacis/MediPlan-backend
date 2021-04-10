@@ -44,6 +44,7 @@ mongoose.connect("mongodb+srv://appo-backend:appo12345@appo.pvehh.mongodb.net/ap
     .catch(err => {
         dbErrors("Failed to connect due to ", err)
     })
+    //set app_port=5000 & set app_database=mongodb+srv://mediplan-backend:eloi-pacis@mediplan.fudo5.mongodb.net/mediplan-backend?retryWrites=true & set app_jwt=mediplanJwtKey & set app_email_user=pacisnkubito@gmail.com &set app_email_password=stephencurry &set DEBUG=app:*,db:*,error & 
 //connecting to application port
 const port = process.env.PORT || config.get("PORT")
 app.listen(port, () => {

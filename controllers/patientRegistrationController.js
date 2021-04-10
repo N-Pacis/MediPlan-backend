@@ -32,7 +32,8 @@ exports.registerPatient = async(req, res) => {
 
             //sending an email to the patient
             const subject = "MediPlan:Verify your email by clicking the link below"
-            const html = `<a href='http://localhost:5000/verification/${token}'>Mediplan Verification Link.</a>`
+            const html = `<a href='http://localhost:5000/verification/${token}'>Mediplan Verification Link.</a>`;
+            //@ts-ignore
             sendEmail(patient.Email, subject, html)
 
             //sending a response
@@ -55,10 +56,12 @@ exports.validatePatientByEmail = async(req, res) => {
         //decode the jwt token using the private key
         const decoded = jwt.verify(token, config.get("jwtPrivateKey"))
             //extract the patientId from the decoded token
+            //@ts-ignore
         const patientId = decoded._id
             //find the patient in the database and update him/her
         let patient = await Patient.findByIdAndUpdate(patientId, { isValidated: true }, { new: true })
             //generate a new token for the updated record
+            //@ts-ignoreA Z              
         patient.generateAuthToken()
         res.send("Your email is now validated")
     } catch (ex) {
