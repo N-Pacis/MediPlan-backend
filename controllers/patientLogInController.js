@@ -9,14 +9,14 @@ exports.logInPatient = async(req , res ) => {
         if(error) return res.status(400).send(error.details[0].message);
         
         //search if the patient with either email exist
-        let patient = Patient.findOne({Email: req.body.Email});
+        let patient = await Patient.findOne({Email: req.body.Email});
         if(!patient) return res.status(400).send("Invalid email or password!");
         
         // check if req.body.password exists
-        const validPassword = bcrypt.compare(req.body.Password, patient.Password);
+        const validPassword = await bcrypt.compare(req.body.Password, patient.Password);
         if(!validPassword) return res.status(400).send("Invalid email or password!");
-        
-        res.send(true);
+        const token = patient.generateAuthToken();
+        res.send(token);
     } 
     // catch error if occured
     catch(error){

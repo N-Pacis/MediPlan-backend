@@ -17,6 +17,14 @@ function validatePatientRegistration(patient) {
     return Joi.validate(patient, schema)
 }
 
+function validatePatientLogIn(patient){
+    const schema = {
+        Email: Joi.string().min(5).max(200).required().email(),
+        Password: Joi.string().min(5).max(200).required()
+    }
+    return Joi.validate(patient, schema);
+}
+
 const patientRegistrationSchema = new mongoose.Schema({
     firstname: {
         type: String,
@@ -81,3 +89,4 @@ const Patient = mongoose.model('patientInformation', patientRegistrationSchema)
 
 exports.Patient = Patient
 exports.validate = validatePatientRegistration
+exports.validateLogIn = validatePatientLogIn

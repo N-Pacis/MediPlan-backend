@@ -28,6 +28,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 //calling the routes
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(require('./routes/patientRegistrationRoute'))
+app.use(require('./routes/patientLogInRoute'));
 
 // //checking if the port environment variable is sett
 if (!config.get("PORT")) {
