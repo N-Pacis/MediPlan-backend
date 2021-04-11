@@ -7,7 +7,36 @@ exports.getFavorites = async(req,res)=>{
         const userId = req.user._id
         //we get the list of favorites
         const favorites = await Favorite.find({user:userId})
-        if(!favorites) return res.status(400).send("You have no favorites yet!")
+        if(!favorites) return res.status(400).send("You have no favorites yet!");
+        res.send(favorites);
+    }
+    catch(ex){
+        res.status(500).send(ex.message)
+    }
+}
+// function to get favorite doctors
+exports.getFavoriteDoctors = async(req,res)=>{
+    try{
+        //we get the user from the authentiction middleware
+        const userId = req.user._id
+        //we get the list of favorites
+        const favorites = await Favorite.find({user:userId, favoriteCategory:'doctor'})
+        if(!favorites) return res.status(400).send("You have no favorites yet!");
+        res.send(favorites);
+    }
+    catch(ex){
+        res.status(500).send(ex.message)
+    }
+}
+
+// function to get favorite hospitals
+exports.getFavoriteHospitals = async(req,res)=>{
+    try{
+        //we get the user from the authentiction middleware
+        const userId = req.user._id
+        //we get the list of favorites
+        const favorites = await Favorite.find({user:userId, favoriteCategory:'hospital'})
+        if(!favorites) return res.status(400).send("You have no favorites yet!");
         res.send(favorites);
     }
     catch(ex){
@@ -97,5 +126,63 @@ exports.addNewFavorite = async (req, res) => {
         }
     } catch (ex) {
         res.status(500).send(ex.message)
+    }
+}
+
+exports.getNumberOfFav = async(req, res)=>{
+    try {
+        // getting the user
+
+        const userId = req.user._id;
+
+        // getting number of user's saved favorites
+        Favorite.find({user: userId})
+        .then(favorites =>{
+                return res.status(200).send(favorites.length);
+        })
+        
+    } catch (err) {
+        return res.status(400).send(err)
+    }
+
+}
+
+// function to delete all favorites
+
+exports.deleteAllFavorites = async(req,res)=>{
+    try {
+        // getting the user
+        const userId = req.user._id;
+        // deleting all favorites
+        Favorite.remove({user: userId})
+        .then( result =>{
+            if(result){
+                return res.status(200).send("Deleted all");
+            }else{
+                return res.status(200).send("You have no favorites yet...")
+            }
+        })
+        
+    } catch (error) {
+        return res.stauts(400).send(error)
+    }
+}
+exports.deleteOneFavorite = async(req, res)=>{
+    try {
+        // getting the user
+        const userId = req.user._id;
+        const favId = req.params.id;
+        // deleting all favorites
+        Favorite.remove({user: userId, _id:id})
+        .then( result =>{
+            if(result){
+                return res.status(200).send("Deleted successfully");
+            }else{
+                return res.status(200).send("Not found");
+            }
+        })
+        
+    } catch (error) {
+        return res.status(400).send(error);
     }
 }
